@@ -1,26 +1,91 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-page: #F7F9F7;
+    --bg-card: #FFFFFF;
+    --primary: #1F6B4F;
+    --primary-hover: #17533D;
+    --primary-light: #EAF5EF;
+    --text-primary: #17221C;
+    --text-secondary: #6B756E;
+    --border-color: #E5EAE6;
+  }
+
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Make tabular numbers default on numbers and codes */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Subtle Radar / RFID Scan Pulse */
+@keyframes radar-pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(1.22);
+    opacity: 0;
+  }
+}
+
+.animate-radar-pulse {
+  animation: radar-pulse 2.4s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+}
+
+@keyframes live-indicator {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+}
+
+.animate-live-dot {
+  animation: live-indicator 2s ease-in-out infinite;
+}
+
+/* Card Elevation & Border Detail */
+.farm-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E5EAE6;
+  box-shadow: 0 1px 3px 0 rgba(23, 34, 28, 0.04), 0 1px 2px -1px rgba(23, 34, 28, 0.02);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.farm-card:hover {
+  border-color: #D3DDD5;
+  box-shadow: 0 4px 12px 0 rgba(23, 34, 28, 0.05), 0 2px 4px -2px rgba(23, 34, 28, 0.02);
+}
+
+/* Custom Clean Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #D3DDD5;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #AAB7AC;
 }
